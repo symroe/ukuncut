@@ -1,9 +1,11 @@
 import json
 import urllib2
+import re
 
 from django.contrib.gis.geos import Point
 
 from ukuncut.models import Brand, Dodger
+from openingtimes.models import OpenTime
 
 # test_url = "http://cloudservices.arcadiagroup.co.uk/storestock/storestock?brand=12556&jsonp_callback=jsonp1292077523475&lat=51.461752&long=-0.114286&dist=50000&res=10&_=1292077544710"
 
@@ -59,3 +61,49 @@ def scrape():
                 d.location = Point(float(store['latitude']), float(store['longitude']))
             d.country = store['country']
             d.save()
+            
+            
+            # Delete all opeing times for this Dodger
+            d.opening_times.all().delete()
+            
+            def parse_open_time(str_time):
+                # 08:00-21:00
+                if str_time:
+                    open_close = str_time.split('-')
+                    if len(open_close) >= 2:
+                        open_close = [v.replace('.', ':') for v in open_close]
+                        return open_close
+                
+            try:
+                # Monday
+                open_close = parse_open_time(store.get('openingMon'))
+                if store.get('openingMon') and open_close:
+                    o = d.opening_times.create(day_of_week=0, open_time=open_close[0], close_time=open_close[1])
+                # Tuesday
+                open_close = parse_open_time(store.get('openingTue'))
+                if store.get('openingTue') and open_close:
+                    o = d.opening_times.create(day_of_week=1, open_time=open_close[0], close_time=open_close[1])
+                # Wednesday
+                open_close = parse_open_time(store.get('openingWed'))
+                if store.get('openingWed') and open_close:
+                    o = d.opening_times.create(day_of_week=2, open_time=open_close[0], close_time=open_close[1])
+                # Thursday
+                open_close = parse_open_time(store.get('openingThu'))
+                if store.get('openingThu') and open_close:
+                    o = d.opening_times.create(day_of_week=3, open_time=open_close[0], close_time=open_close[1])
+                # Friday
+                open_close = parse_open_time(store.get('openingFri'))
+                if store.get('openingFri') and open_close:
+                    o = d.opening_times.create(day_of_week=4, open_time=open_close[0], close_time=open_close[1])
+                # Saturday
+                open_close = parse_open_time(store.get('openingSat'))
+                if store.get('openingSat') and open_close:
+                    o = d.opening_times.create(day_of_week=5, open_time=open_close[0], close_time=open_close[1])
+                # Sunday
+                open_close = parse_open_time(store.get('openingSun'))
+                if store.get('openingSun') and open_close:
+                    o = d.opening_times.create(day_of_week=6, open_time=open_close[0], close_time=open_close[1])
+            except Exception, e:
+                print e
+                print open_close
+                
