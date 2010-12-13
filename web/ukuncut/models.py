@@ -17,13 +17,12 @@ class OpenNowManager(models.GeoManager):
         t = now.strftime('%H:%M')
         d = now.weekday()
         
-        print repr(d)
-
         qs = super(OpenNowManager, self).get_query_set()
+        return qs
         qs = qs.filter(
-            opening_times__open_time__lt=t, 
-            opening_times__close_time__gt=t,
-            opening_times__day_of_week=d,
+            # opening_times__open_time__lt=t, 
+            # opening_times__close_time__gt=t,
+            # opening_times__day_of_week=d,
             )
         return qs
 
@@ -48,7 +47,7 @@ class Dodger(models.Model):
     address4 = models.CharField(blank=True, null=True, max_length=255)
     postcode = models.CharField(blank=True, null=True, max_length=20)
     phone = models.CharField(blank=True, null=True, max_length=100)
-    location = models.PointField(spatial_index=True, null=True, blank=True)
+    location = models.PointField(spatial_index=True, geography=True, null=True, blank=True)
     country = models.CharField(blank=True, null=True, max_length=100)
     opening_times = generic.GenericRelation(OpenTime)
 
