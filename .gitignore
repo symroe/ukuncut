@@ -1,0 +1,7 @@
+/lib
+/bin
+/build
+/include
+.Python
+web/settings.py
+*.pyc
