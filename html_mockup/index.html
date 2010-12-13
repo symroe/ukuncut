@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascript/jquery.geolocation.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascript/main.js" type="text/javascript" charset="utf-8"></script>
+	<title>index</title>
+
+</head>
+
+<body onload="locate();">
+
+    <div id="header">
+        UK Uncut: Big Society Revenue &amp; Customs
+    </div>
+    <ul id="tabs">
+        <li class="selected">
+            <a href="#">Find a target</a>
+        </li>
+        <li>
+            <a href="#">When you get there</a>
+        </li>
+    </ul>
+    <div id="content">
+        <div id="unsupported">
+            <p>
+                Sorry, you phone or browser does not support geolocation
+            </p>
+        </div>
+        <div id="results">
+            <ul>
+                <li>
+                    <h3>Top Shop - Oxford Street</h3>
+                    <p>
+                        <span class="status open">Open</span> 0.4 miles -<a href="#">View in Google Maps</a>
+                    </p>
+                </li>
+                <li>
+                    <h3>Vodafone - Regents Street</h3>
+                    <p>
+                        <span class="status closed">Closed</span> 0.5 miles -<a href="#">View in Google Maps</a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
