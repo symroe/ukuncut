@@ -1,0 +1,22 @@
+body {padding:0; margin:0;-webkit-text-size-adjust:none;font-family:Helvetica, Arial, Verdana, sans-serif;padding:0;}
+a {padding:0.5em;}
+
+#header  {background:#ccc; font-weight:bold;
+    font-size:0.8em; color:#027B84;padding:3px;}
+#tabs {border-bottom:solid 1px #808080;list-style-type: none;padding:0; margin:0;
+     background:#ccc; padding-top:5px;}
+#tabs li {float:left; width:50%;padding:0; margin:0; background:#ccc;}
+#tabs li.selected {background:#fff;}
+#tabs a {display:block;text-align:center;}
+
+#start {padding:100px 0 0 0; text-align:center;}
+
+#results {display:none;}
+#results ul {list-style-type: none;padding:0; margin:0;border-top:solid 1px #ccc;}
+#results ul li {border-bottom:solid 1px #ccc;padding:10px;}
+
+.status {text-transform:uppercase; font-size:0.9em;}
+.status.open {color:green;}
+.status.closed {color:red;}
+
+#unsupported {display:none; text-align:center; padding-top:10px;}
