@@ -10,8 +10,7 @@ class OpenTimeManager(models.Manager):
         now = datetime.datetime.now()
         t = now.strftime('%H:%M')
         d = now.weekday()
-        
-        # qs = super(OpenTimeManager, self).get_query_set()
+
         qs = self
         qs = qs.filter(
             open_time__lt=t, 
