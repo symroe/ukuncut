@@ -28,10 +28,13 @@ def get_results(request, lat, lng):
         output = "%s (%s)" % (request.GET['callback'], results)
         return HttpResponse(results)
     
+    your_location = (lat, lng)
+    
     return render_to_response(
       'results_ahah.html', 
       {
       'results': results,
+      'your_location': your_location,
       },
       context_instance=RequestContext(request)
     )  
