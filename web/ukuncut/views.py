@@ -19,9 +19,10 @@ def index(request):
 def get_results(request, lat, lng):
     (lat, lng) = (float(lat), float(lng))
     location = Point(lat, lng)
-    results = Dodger.open_now.filter(location__dwithin=(location, D(mi=20))).distance(location).order_by('distance')[:10]
-    # results = Dodger.open_now.distance(location).order_by('distance')[:10]
-        
+
+    results = Dodger.objects.filter(location__dwithin=(location, D(mi=20))).distance(location).order_by('distance')[:10]
+    # results = Dodger.objects.distance(location).order_by('distance')[:10]
+
     if request.GET.get('callback'):
         results = serializers.serialize("json", results)
         output = "%s (%s)" % (request.GET['callback'], results)

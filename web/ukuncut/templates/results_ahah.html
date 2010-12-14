@@ -1,8 +1,8 @@
 {% for result in results %}
     <li>
-        <h3>{{ result.name }}</h3>
+        <h3>{{ result.brand.name }}, {{ result.name|title }}</h3>
         <p>
-            <span class="status open">Open</span> {{ result.distance.mi|floatformat:"1" }} miles -<a href="#">View in Google Maps</a>
+            <span class="status {{ result.is_open|yesno:"open,closed" }}">{{ result.is_open|yesno:"open,closed"|title }}</span> {{ result.distance.mi|floatformat:"1" }} miles -<a href="#">View in Google Maps</a>
         </p>
     </li>
 {% endfor %}

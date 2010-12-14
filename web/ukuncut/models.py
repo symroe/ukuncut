@@ -20,9 +20,9 @@ class OpenNowManager(models.GeoManager):
         qs = super(OpenNowManager, self).get_query_set()
         return qs
         qs = qs.filter(
-            # opening_times__open_time__lt=t, 
-            # opening_times__close_time__gt=t,
-            # opening_times__day_of_week=d,
+            opening_times__open_time__lt=t, 
+            opening_times__close_time__gt=t,
+            opening_times__day_of_week=d,
             )
         return qs
 
@@ -56,3 +56,6 @@ class Dodger(models.Model):
     
     def __unicode__(self):
         return "%s - %s" % (self.name, self.brand.name)
+
+    def is_open(self):
+        return bool(self.opening_times.open_now())
