@@ -6,5 +6,6 @@ from ukuncut.scrapers.vodafone import scrape as scrape_vodafone
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        # scrape_arcadia()
+        scrape_arcadia()
         scrape_vodafone()
+        
