@@ -2,12 +2,13 @@
 <ul>
     {% for result in results %}
     <li>
-        <a href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">
+        <a class="logo" href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">
             <img src="{{MEDIA_URL}}//images/icons/{{ result.brand.name|lower }}.png" width="57" height="57" alt="{{ result.brand.name }}"/>
+            <span class="status {{ result.is_open|yesno:"open,closed" }}">{{ result.is_open|yesno:"open,closed"|title }}</span>            
         </a>
-        <h3>{{ result.brand.name }}, {{ result.name|title }} <span class="status {{ result.is_open|yesno:"open,closed" }}">{{ result.is_open|yesno:"open,closed"|title }}</span> </h3>
+        <h3>{{ result.brand.name }}, {{ result.name|title }}</h3>
         <p>
-            <a href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">{{ result.distance.mi|floatformat:"1" }} miles {% compass  your_location result.location %} - view in Google Maps</a>
+            <strong><a href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">{{ result.distance.mi|floatformat:"1" }} miles {% compass  your_location result.location %} - view in Google Maps</a></strong>
         </p>
         <p>
             {% ifequal result.brand.name 'Vodafone' %}
