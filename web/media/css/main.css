@@ -1,22 +1,34 @@
-body {padding:0; margin:0;-webkit-text-size-adjust:none;font-family:Helvetica, Arial, Verdana, sans-serif;padding:0;}
-a {padding:0.5em;}
+body {padding:0; margin:0;-webkit-text-size-adjust:none;font-family:Helvetica, Arial, Verdana, sans-serif;padding:0;background:#fafafa;}
+a {padding:0.5em 0;color:#149997;}
 
-#header  {background:#ccc; font-weight:bold;
-    font-size:0.8em; color:#027B84;padding:3px;}
+#header  {background:#fff; font-weight:bold;
+    font-size:0.8em; color:#027B84;padding:3px; border-bottom:outset 3px #ccc;}
+#header #tagline {position:absolute;top:3px; right:0;}
+    
 #tabs {border-bottom:solid 1px #808080;list-style-type: none;padding:0; margin:0;
-     background:#ccc; padding-top:5px;}
+     background:#ccc;}
 #tabs li {float:left; width:50%;padding:0; margin:0; background:#ccc;}
-#tabs li.selected {background:#fff;}
-#tabs a {display:block;text-align:center;}
+#tabs li.selected {background:#fafafa; font-weight:bold;}
+#tabs a {display:block;text-align:center;text-decoration:none;}
 
 #start {padding:100px 0 0 0; text-align:center;}
 
 #results {display:none;}
-#results ul {list-style-type: none;padding:0; margin:0;border-top:solid 1px #ccc;}
+#results ul {list-style-type: none;padding:0; margin:16px 0 0 0;clear:both;}
 #results ul li {border-bottom:solid 1px #ccc;padding:10px;}
+#results ul li:nth-child(odd) {
+  background-color: #f8f8f8;
+}
+#results ul li img {float:left;margin:0 15px 5px 0; border:solid 1px #808080; padding:3px;}
+#results ul li h3 {padding:5px 0 0 0; margin:0; font-weight:normal; font-size:16px;}
+#results ul li p {font-size:14px;padding:3px 0; margin:0;}
 
-.status {text-transform:uppercase; font-size:0.9em;}
-.status.open {color:green;}
-.status.closed {color:red;}
+.status {text-transform:uppercase; font-size:0.8em; color:#fff; padding:2px 5px; position:relative; left:5px;}
+.status.open {background:#4d863d;}
+.status.closed {background:#9e2828;}
 
 #unsupported {display:none; text-align:center; padding-top:10px;}
+
+#loading {text-align:center; padding-top:100px; color:#808080;}
+
+.instructions p {padding:10px; clear:both;}

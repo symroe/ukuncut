@@ -17,14 +17,15 @@
 <body>
 
     <div id="header">
-        UK Uncut: Big Society Revenue &amp; Customs
+        <img id="logo" src="{{MEDIA_URL}}/images/logo.png" height="30" width="168"/>
+        <img id="tagline" src="{{MEDIA_URL}}/images/mobile.png" height="30" width="92"/>    
     </div>
     <ul id="tabs">
-        <li class="selected">
-            <a href="#">Find a target</a>
+        <li{% ifequal menu_item 'index' %} class="selected"{% endifequal %}>
+            <a href="{% url index %}">Find a target</a>
         </li>
-        <li>
-            <a href="#">When you get there</a>
+        <li{% ifequal menu_item 'instructions' %} class="selected"{% endifequal %}>
+            <a href="{% url instructions %}">When you get there</a>
         </li>
     </ul>
     <div id="content">

@@ -13,8 +13,15 @@ def index(request):
 
     return render_to_response(
       'mobile_results.html', 
-      context_instance=RequestContext(request)
+      context_instance=RequestContext(request, {'menu_item': 'index',})
     )  
+    
+def instructions(request):
+
+    return render_to_response(
+      'instructions.html', 
+      context_instance=RequestContext(request, {'menu_item': 'instructions',})
+    )    
 
 def get_results(request, lat, lng):
     (lat, lng) = (float(lat), float(lng))
