@@ -12,7 +12,7 @@
     {# // <script src="{{ MEDIA_URL }}javascript/jquery.geolocation.js" type="text/javascript" charset="utf-8"></script> #}
     <script src="{{ MEDIA_URL }}javascript/jQuery.geolocator.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{ MEDIA_URL }}javascript/main.js" type="text/javascript" charset="utf-8"></script>
-	<title>Big Society Revenue &amp; Customs{% block title %}{% endblock %}</title>
+	<title>{% block title %}Big Society Revenue &amp; Customs{% endblock %}</title>
 
 </head>
 
@@ -24,10 +24,10 @@
     </div>
     <ul id="tabs">
         <li{% ifequal menu_item 'index' %} class="selected"{% endifequal %}>
-            <a href="{% url index %}">Find a target</a>
+            <a href="{% url index %}">Find A Target</a>
         </li>
         <li{% ifequal menu_item 'instructions' %} class="selected"{% endifequal %}>
-            <a href="{% url instructions %}">When you get there</a>
+            <a href="{% url instructions %}">When You Get There</a>
         </li>
     </ul>
     <div id="content">
