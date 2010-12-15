@@ -68,6 +68,6 @@ def kml(request):
       context_instance=RequestContext(request)
     )
     
-    return HttpResponse(result,mimetype='Content-Type:application/vnd.google-earth.kml+xml')
+    return HttpResponse(results,mimetype='Content-Type:application/vnd.google-earth.kml+xml')
     
     
