@@ -48,3 +48,17 @@ def example(request):
     for d in closest:
         res.write("%s<br>" % d)
     return res
+
+
+def kml(request):
+    results = Dodger.objects.all()
+    
+    return render_to_response(
+      'kml.html', 
+      {
+      'results': results,
+      },
+      context_instance=RequestContext(request)
+    )  
+    
+    

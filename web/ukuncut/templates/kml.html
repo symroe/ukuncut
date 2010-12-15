@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1";>
+
+<Document>
+<name>UK UNCUT Dodger locations</name>
+<description></description>
+
+
+{% for result in results %}
+<Placemark>
+<name>{{ result.brand.name }}</name>
+<description>
+    {{ result.name }}
+    {{ result.address1 }}
+    {{ result.address2 }}
+    {{ result.address3 }}
+    {{ result.address4 }}
+    {{ result.postcode }}
+    
+</description>
+<Point>
+<coordinates>{{result.lng}},{{location.lat}}</coordinates>
+</Point>
+</Placemark>
+{% endfor %}
+
+
+</Document>
+</kml>
