@@ -20,10 +20,10 @@ a {padding:0.5em 0;color:#149997;}
   background-color: #f8f8f8;
 }
 #results ul li img {float:left;margin:0 15px 5px 0; border:solid 1px #808080; padding:3px;}
-#results ul li h3 {padding:5px 0 0 0; margin:0; font-weight:normal; font-size:16px;}
-#results ul li p {font-size:14px;padding:3px 0; margin:0;}
+#results ul li h3 {padding:5px 0 0 0; margin:0; font-weight:normal; font-size:14px;}
+#results ul li p {font-size:12px;padding:3px 0; margin:0;}
 
-.status {text-transform:uppercase; font-size:0.8em; color:#fff; padding:2px 5px; position:relative; left:5px;}
+.status {text-transform:uppercase; font-size:0.7em; color:#fff; padding:2px 5px; position:relative; left:5px;}
 .status.open {background:#4d863d;}
 .status.closed {background:#9e2828;}
 
