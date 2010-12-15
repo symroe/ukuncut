@@ -3,7 +3,9 @@
 {% block content %}
     <div id="unsupported">
         <p>
-            Sorry, you phone or browser does not support geolocation
+            Sorry, you phone or browser does not support geolocation, try entering your post code instead:
+            <form id="postcode_form"><input type="text" id="postcode"/><input type="submit" value="Search" id="postcode_search"><span id="error"></span></form>
+            
         </p>
     </div>
     <div id="results"></div>
