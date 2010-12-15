@@ -8,6 +8,7 @@ import BeautifulSoup
 from django.contrib.gis.geos import Point
 
 from ukuncut.models import Dodger, Brand
+from openingtimes.models import OpenTime
 
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
@@ -137,6 +138,102 @@ def parse(handle):
         except Exception, e:
             print brand_name, e
 
+def parse_details(handle):
+    soup = BeautifulSoup.BeautifulSoup(handle)
+    result_div = soup.find('div', {'id' : 'template9_middle_bottom_left'})
+    for result in result_div.findAll('div', {'class' : re.compile('transBack')}):
+        try:
+            cells = result.findAll('p', {'class' : 'paddingTop10'})
+
+            addresses = ''.join([e for e in cells[3].recursiveChildGenerator() if isinstance(e,unicode)])
+            addresses = addresses.strip().split('\n')
+
+            name = addresses.pop(0)
+            postcode = addresses.pop(-1)
+
+            addresses_dict = {}
+            for i, address in enumerate(addresses):
+                i = i+1
+                addresses_dict["address%s" % i] = address
+
+            phone = cells[2].contents[1].split(' or ')[0].strip()
+
+            try:
+                d = Dodger.objects.get(name=name, company=company_id, postcode=postcode)
+            except Exception, e:
+                d = Dodger(name=name, company=company_id, postcode=postcode)
+                print "unknown store"
+            
+            d.phone = phone
+            d.save()
+
+            opening_times = cells[1]
+            if len(opening_times) > 3:
+                # print opening_times
+                opening_times = ''.join([e for e in opening_times.recursiveChildGenerator() if isinstance(e,unicode)])
+                opening_times = opening_times.split('\n')[2:]
+
+                mon = opening_times[0]
+                tue = opening_times[1]
+                wed = opening_times[2]
+                thu = opening_times[3]
+                fri = opening_times[4]
+                sat = opening_times[5]
+                sun = opening_times[6]
+
+            # Delete all opeing times for this Dodger
+            d.opening_times.all().delete()
+            def parse_open_time(str_time):
+                # Sunday: 1000-1630
+                if str_time:
+                    open_close = str_time.split(':')[1]
+                    open_close = open_close.split('-')
+                    if len(open_close) >= 2:
+                        for i,v in enumerate(open_close):
+                            v = v.replace('.', ':').strip()
+                            v = list(v)
+                            v.insert(2, ':')
+                            v = "".join(v)
+                            open_close[i] = v
+                        return open_close
+            try:
+                # Monday
+                open_close = parse_open_time(mon)
+                if mon and open_close:
+                    o = d.opening_times.create(day_of_week=0, open_time=open_close[0], close_time=open_close[1])
+                # Tuesday
+                open_close = parse_open_time(tue)
+                if tue and open_close:
+                    o = d.opening_times.create(day_of_week=1, open_time=open_close[0], close_time=open_close[1])
+                # Wednesday
+                open_close = parse_open_time(wed)
+                if wed and open_close:
+                    o = d.opening_times.create(day_of_week=2, open_time=open_close[0], close_time=open_close[1])
+                # Thursday
+                open_close = parse_open_time(thu)
+                if thu and open_close:
+                    o = d.opening_times.create(day_of_week=3, open_time=open_close[0], close_time=open_close[1])
+                # Friday
+                open_close = parse_open_time(fri)
+                if fri and open_close:
+                    o = d.opening_times.create(day_of_week=4, open_time=open_close[0], close_time=open_close[1])
+                # Saturday
+                open_close = parse_open_time(sat)
+                if sat and open_close:
+                    o = d.opening_times.create(day_of_week=5, open_time=open_close[0], close_time=open_close[1])
+                # Sunday
+                open_close = parse_open_time(sun)
+                if sun and open_close:
+                    o = d.opening_times.create(day_of_week=6, open_time=open_close[0], close_time=open_close[1])
+            except Exception, e:
+                print "error parsing opening times"
+                print e
+                print open_close
+
+        except Exception, e:
+            print brand_name, e
+
+
 
 def scrape():
     """
@@ -157,3 +254,8 @@ def scrape():
             req = Request(url, headers=headers)
             handle = urlopen(req) 
             parse(handle)
+
+            url = "http://online.vodafone.co.uk/dispatch/Portal/appmanager/vodafone/wrp?_nfpb=true&Portlet_BOS_StoreLocator_Page_Help_StoreLocator_actionOverride=/portlets/ecare/storelocator/browse&_windowLabel=Portlet_BOS_StoreLocator_Page_Help_StoreLocator&_pageLabel=Page_Help_StoreLocator&action=http://www.multimap.com/clients/browse.cgi&client=vodafone_unity&lon=%s&lat=%s&scale=10000&width=460&height=300&rt=browse2&count=149&filter=All&coordsys=gb" % cell
+            req = Request(url, headers=headers)
+            handle = urlopen(req) 
+            parse_details(handle)
