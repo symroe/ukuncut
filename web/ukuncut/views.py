@@ -60,12 +60,14 @@ def example(request):
 def kml(request):
     results = Dodger.objects.all()
     
-    return render_to_response(
+    results =  render_to_response(
       'kml.html', 
       {
       'results': results,
       },
       context_instance=RequestContext(request)
-    )  
+    )
+    
+    return HttpResponse(result,mimetype='Content-Type:application/vnd.google-earth.kml+xml')
     
     
