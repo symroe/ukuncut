@@ -8,14 +8,14 @@ def compass(here, there):
     eastwest = there[1] - here[1]
 
     if northsouth < 0:
-        northsouth_value = "South"
+        northsouth_value = "south"
     else:
-        northsouth_value = "North"
+        northsouth_value = "north"
 
     if eastwest < 0:
-        eastwest_value = "West"
+        eastwest_value = "west"
     else:
-        eastwest_value = "East"
+        eastwest_value = "east"
 
     northsouth = abs(northsouth)
     eastwest = abs(eastwest)

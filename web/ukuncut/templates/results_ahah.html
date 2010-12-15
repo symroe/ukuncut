@@ -1,10 +1,22 @@
 {% load compass %}
-
-{% for result in results %}
+<ul>
+    {% for result in results %}
     <li>
-        <h3>{{ result.brand.name }}, {{ result.name|title }}</h3>
+        <a href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">
+            <img src="{{MEDIA_URL}}//images/icons/{{ result.brand.name|lower }}.png" width="57" height="57" alt="{{ result.brand.name }}"/>
+        </a>
+        <h3>{{ result.brand.name }}, {{ result.name|title }} <span class="status {{ result.is_open|yesno:"open,closed" }}">{{ result.is_open|yesno:"open,closed"|title }}</span> </h3>
         <p>
-            <span class="status {{ result.is_open|yesno:"open,closed" }}">{{ result.is_open|yesno:"open,closed"|title }}</span> {{ result.distance.mi|floatformat:"1" }} miles {% compass  your_location result.location %} -<a href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">View in Google Maps</a>
+            <a href="http://maps.google.co.uk/maps?q={{ result.location.0 }},{{ result.location.1 }}" tagget="_blank">{{ result.distance.mi|floatformat:"1" }} miles {% compass  your_location result.location %} - view in Google Maps</a>
+        </p>
+        <p>
+            {% ifequal result.brand.name 'Vodafone' %}
+                For the last ten years Vodafone have been fighting tooth and nail to avoid paying the UK government around £6bn in tax.
+            {% else %}
+                Part of the Arcadia Group, shares of which are owned by the wife of Philip Green who lives in Monaco. 
+                Amounts to a £285m tax dodge which could could pay for £9,000 fees for almost 32,000 students or the salaries of 20,000 NHS nurses.
+            {% endifequal %}
         </p>
     </li>
-{% endfor %}
+    {% endfor %}
+</ul>
