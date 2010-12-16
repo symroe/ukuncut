@@ -80,15 +80,15 @@ def parse_store(store_id, req):
         geo_url = 'http://maps.googleapis.com/maps/api/geocode/json?%s&region=gb&sensor=false' % arg
         geo_data = json.loads(urllib2.urlopen(geo_url).read())
         geo_result = geo_data['results'][0]['geometry']['location']
-        d.location = Point(float(geo_result['lat']), float(geo_result['lng']))
+        (lat, lng)  = float(geo_result['lat']), float(geo_result['lng'])
+        if (lng > -9 and lng < 3) and (lat > 48 and lat < 62):
+            d.location = Point(lat, lng)
     except Exception, e:
         print e
         print geo_url
         # raise
-    try:    
-        d.save()
-    except Exception, e:
-        print e
+
+    d.save()
 
 def scrape():
     # uncomment to ge new IDs
