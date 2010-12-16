@@ -14,6 +14,8 @@ company_id = Dodger.C_BHS
 brand_name = Dodger.COMPANIES[company_id-1][1]
 brand_id = company_id
 
+print brand_name
+
 try:
     brand = Brand.objects.get(brand_id=brand_id)
 except Brand.DoesNotExist:
@@ -78,7 +80,6 @@ def parse_store(store_id, req):
         geo_url = 'http://maps.googleapis.com/maps/api/geocode/json?%s&region=gb&sensor=false' % arg
         geo_data = json.loads(urllib2.urlopen(geo_url).read())
         geo_result = geo_data['results'][0]['geometry']['location']
-        print geo_result, geo_url
         d.location = Point(float(geo_result['lat']), float(geo_result['lng']))
     except Exception, e:
         print e
