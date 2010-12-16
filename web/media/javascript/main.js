@@ -103,6 +103,7 @@ $(document).ready(function(){
                 return false;
             }
         );
+        $('#tab_one a').attr('href', '#');
         
         $('#tab_two a').click(
             function(){
@@ -110,6 +111,7 @@ $(document).ready(function(){
                 return false;
             }
         );   
+        $('#tab_two a').attr('href', '#');        
         
         if ($('#tab1').is(":visible")){
           setup_results();  
