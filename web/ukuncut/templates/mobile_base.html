@@ -6,11 +6,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width,minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes">	
+    <link rel="apple-touch-icon-precomposed" href="{{MEDIA_URL}}/images/iphone_icon.png" />
     <link rel="apple-touch-icon" href="{{MEDIA_URL}}/images/iphone_icon.png" />   
     <link href="{{MEDIA_URL}}/images/startup.png" rel="apple-touch-startup-image" /> 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     {# // <script src="{{ MEDIA_URL }}javascript/jquery.geolocation.js" type="text/javascript" charset="utf-8"></script> #}
+    <script src="{{ MEDIA_URL }}javascript/bookmark_bubble.js" type="text/javascript" charset="utf-8"></script>    
     <script src="{{ MEDIA_URL }}javascript/jQuery.geolocator.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{ MEDIA_URL }}javascript/main.js" type="text/javascript" charset="utf-8"></script>
 	<title>{% block title %}Big Society Revenue &amp; Customs{% endblock %}</title>
@@ -24,10 +26,10 @@
         <img id="tagline" src="{{MEDIA_URL}}/images/mobile.png" height="30" width="92"/>    
     </div>
     <ul id="tabs">
-        <li{% ifequal menu_item 'index' %} class="selected"{% endifequal %}>
+        <li id="tab_one"{% ifequal menu_item 'index' %} class="selected"{% endifequal %}>
             <a href="{% url index %}">Find A Target</a>
         </li>
-        <li{% ifequal menu_item 'instructions' %} class="selected"{% endifequal %}>
+        <li id="tab_two"{% ifequal menu_item 'instructions' %} class="selected"{% endifequal %}>
             <a href="{% url instructions %}">When You Get There</a>
         </li>
     </ul>
