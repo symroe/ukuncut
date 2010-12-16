@@ -98,7 +98,7 @@ def parse_store(store_id, req):
         if str_time:
             open_close = str_time.split('-')
             if len(open_close) >= 2:
-                open_close = [v.replace('.', ':') for v in open_close]
+                open_close = [v.replace('.', ':').strip() for v in open_close]
                 return open_close
     
     opening_table = soup.find('table', id='opening_hours')
