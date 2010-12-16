@@ -11,17 +11,6 @@ function post_locate(geolocation_data) {
 
 $(document).ready(function(){
 
-        //do somehting to the links to keep iphone webapps happy
-        var a=document.getElementsByTagName("a");
-        for(var i=0;i<a.length;i++)
-        {
-            a[i].onclick=function()
-            {
-                window.location=this.getAttribute("href");
-                return false
-            }
-        }
-    
         //setup geolocation callback
         $.geolocator.geolocate({ callback: post_locate});
         
