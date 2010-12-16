@@ -8,8 +8,13 @@ a {padding:0.5em 0;color:#149997;}
 #tabs {border-bottom:solid 1px #808080;list-style-type: none;padding:0; margin:0;
      background:#ccc;}
 #tabs li {float:left; width:50%;padding:0; margin:0; background:#ccc;}
-#tabs li.selected {background:#fafafa; font-weight:bold;}
-#tabs a {display:block;text-align:center;text-decoration:none;}
+#tabs li.selected {background:#fafafa; font-weight:bold;border-bottom:none;}
+#tabs a {display:block;text-align:center;text-decoration:none;border-bottom:solid 1px #000;}
+#tabs li.selected a {border-bottom:none;}
+#tabs li#tab_one a {border-right:solid 1px #808080;}
+#tabs li#tab_two a {border-left:solid 1px #808080;}
+#tabs li#tab_one.selected a {border-right:none;}
+#tabs li#tab_two.selected a {border-right:none;}
 
 #start {padding:100px 0 0 0; text-align:center;}
 
