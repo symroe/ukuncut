@@ -90,6 +90,64 @@ def parse_store(store_id, req):
 
     d.save()
 
+    
+    d.opening_times.all().delete()
+
+    def parse_open_time(str_time):
+        # 08:00-21:00
+        if str_time:
+            open_close = str_time.split('-')
+            if len(open_close) >= 2:
+                open_close = [v.replace('.', ':') for v in open_close]
+                return open_close
+    
+    opening_table = soup.find('table', id='opening_hours')
+    opening_times = opening_table.findAll('tr')
+    mon = opening_times[0].findAll('td')[1].string.strip()
+    tue = opening_times[1].findAll('td')[1].string.strip()
+    wed = opening_times[2].findAll('td')[1].string.strip()
+    thu = opening_times[3].findAll('td')[1].string.strip()
+    fri = opening_times[4].findAll('td')[1].string.strip()
+    sat = opening_times[5].findAll('td')[1].string.strip()
+    sun = opening_times[6].findAll('td')[1].string.strip()
+
+
+    try:
+        # Monday
+        open_close = parse_open_time(mon)
+        if mon and open_close:
+            o = d.opening_times.create(day_of_week=0, open_time=open_close[0], close_time=open_close[1])
+        # Tuesday
+        open_close = parse_open_time(tue)
+        if tue and open_close:
+            o = d.opening_times.create(day_of_week=1, open_time=open_close[0], close_time=open_close[1])
+        # Wednesday
+        open_close = parse_open_time(wed)
+        if wed and open_close:
+            o = d.opening_times.create(day_of_week=2, open_time=open_close[0], close_time=open_close[1])
+        # Thursday
+        open_close = parse_open_time(thu)
+        if thu and open_close:
+            o = d.opening_times.create(day_of_week=3, open_time=open_close[0], close_time=open_close[1])
+        # Friday
+        open_close = parse_open_time(fri)
+        if fri and open_close:
+            o = d.opening_times.create(day_of_week=4, open_time=open_close[0], close_time=open_close[1])
+        # Saturday
+        open_close = parse_open_time(sat)
+        if sat and open_close:
+            o = d.opening_times.create(day_of_week=5, open_time=open_close[0], close_time=open_close[1])
+        # Sunday
+        open_close = parse_open_time(sun)
+        if sun and open_close:
+            o = d.opening_times.create(day_of_week=6, open_time=open_close[0], close_time=open_close[1])
+    except Exception, e:
+        print "error parsing opening times"
+        print e
+        print open_close
+    
+
+
 def scrape():
     # uncomment to ge new IDs
     # populate_ids()
