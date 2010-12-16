@@ -1,19 +1,33 @@
 {% extends "mobile_base.html" %}
 
 {% block content %}
-    <div id="unsupported">
-        <p>
-            Sorry, you phone or browser does not support geolocation, try entering your post code instead:
-            <form id="postcode_form"><input type="text" id="postcode"/><input type="submit" value="Search" id="postcode_search"><span id="error"></span></form>
+    <div id="tab1">
+        <div id="unsupported">
+            <p>
+                Sorry, you phone or browser does not support geolocation, try entering your post code instead:
+                <form id="postcode_form"><input type="text" id="postcode"/><input type="submit" value="Search" id="postcode_search"><span id="error"></span></form>
             
-        </p>
+            </p>
+        </div>
+        <div id="results"></div>
+        <div id="loading">
+            <img src="{{MEDIA_URL}}/images/loading.gif" alt="loading"/>
+            <p>
+                Locating Targets
+            </p>
+        </div>
     </div>
-    <div id="results"></div>
-    <div id="loading">
-        <img src="{{MEDIA_URL}}/images/loading.gif" alt="loading"/>
-        <p>
-            Locating Targets
-        </p>
-    </div>
+    <div id="tab2">
+        <div class="instructions">
+            <p>
+                The form the action takes is up to you.
+                So far people have picketed, leafleted, staged performances, glued themselves to windows, 
+                occupied stores and even held an intrepid one woman protest.
+            </p>
+            <p>
+                We are targeting big corporations and the governments that support them, <strong>not staff or customers</strong> who are being screwed too. Civil disobedience is an important part of what we do, but whatever you decide to do <strong>keep it creative and constructive</strong>.
+            </p>
+        </div>
+    </div>    
     
 {% endblock %}

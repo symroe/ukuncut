@@ -39,3 +39,5 @@ a {padding:0.5em 0;color:#149997;}
 #loading {text-align:center; padding-top:100px; color:#808080;}
 
 .instructions p {padding:10px; clear:both;}
+
+#tab2 {display:none;}
