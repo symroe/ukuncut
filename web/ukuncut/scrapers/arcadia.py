@@ -4,7 +4,7 @@ import re
 
 from django.contrib.gis.geos import Point
 
-from ukuncut.models import Brand, Dodger
+from web.ukuncut.models import Brand, Dodger
 from openingtimes.models import OpenTime
 
 # test_url = "http://cloudservices.arcadiagroup.co.uk/storestock/storestock?brand=12556&jsonp_callback=jsonp1292077523475&lat=51.461752&long=-0.114286&dist=50000&res=10&_=1292077544710"

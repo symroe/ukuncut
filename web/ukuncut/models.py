@@ -61,3 +61,23 @@ class Dodger(models.Model):
 
     def is_open(self):
         return bool(self.opening_times.open_now())
+
+class EventManager(models.GeoManager):
+
+    def get_query_set(self):
+        yesterday = datetime.datetime.today() - datetime.timedelta(1)
+        qs = super(EventManager, self).get_query_set()
+        return qs.filter(date__gt=yesterday)
+    
+    
+class Event(models.Model):
+    name = models.CharField(blank=True, max_length=255)
+    location = models.PointField(spatial_index=True, geography=True, null=True, blank=True)
+    date = models.DateField(default=datetime.datetime.today)
+    url = models.URLField(blank=True, verify_exists=True)
+    
+    objects = EventManager()
+    
+    def __unicode__(self):
+        return "%s, %s" % (self.name, self.date)
+    

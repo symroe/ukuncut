@@ -1,0 +1,11 @@
+{% load compass %}
+<ul>
+    {% for result in results %}
+    <li>
+        <h3><a href="{{ result.url }}">{{ result.name }}, {{ result.date }}</a></h3>
+        <p>
+            <strong>{{ result.distance.mi|floatformat:"1" }} miles {% compass  your_location result.location %}</strong>
+        </p>
+    </li>
+    {% endfor %}
+</ul>

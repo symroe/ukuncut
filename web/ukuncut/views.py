@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 
-from ukuncut.models import Dodger, Brand
+from ukuncut.models import Dodger, Brand, Event
 
 def index(request):
 
@@ -23,6 +23,22 @@ def instructions(request):
       context_instance=RequestContext(request, {'menu_item': 'instructions',})
     )    
 
+def get_events(request, lat, lng):
+    (lat, lng) = (float(lat), float(lng))
+    location = Point(lat, lng)
+    results = Event.objects.distance(location).order_by('distance')[:5]
+    your_location = (lat, lng)
+
+    return render_to_response(
+      'events_ahah.html', 
+      {
+      'results': results,
+      'your_location': your_location,
+      },
+      context_instance=RequestContext(request)
+    )  
+    
+    
 def get_results(request, lat, lng):
     (lat, lng) = (float(lat), float(lng))
     location = Point(lat, lng)

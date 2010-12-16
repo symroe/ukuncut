@@ -5,7 +5,7 @@ import json
 import BeautifulSoup
 from django.contrib.gis.geos import Point
 
-from ukuncut.models import Brand, Dodger
+from web.ukuncut.models import Brand, Dodger
 from openingtimes.models import OpenTime
 
 BASE_URL = "http://www.bhs.co.uk/mall/infopageviewer.cfm/bhsstore/storelocatorbranch?branch_id="

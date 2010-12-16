@@ -7,7 +7,7 @@ import BeautifulSoup
 
 from django.contrib.gis.geos import Point
 
-from ukuncut.models import Dodger, Brand
+from web.ukuncut.models import Dodger, Brand
 from openingtimes.models import OpenTime
 
 cj = cookielib.CookieJar()
