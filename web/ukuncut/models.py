@@ -31,10 +31,12 @@ class Dodger(models.Model):
     
     C_ARCADIA = 1
     C_VODAFONE = 2
+    C_BHS = 3
     
     COMPANIES = (
         (C_ARCADIA, 'Arcadia'),
         (C_VODAFONE, 'Vodafone'),
+        (C_BHS, 'BHS'),
     )
     
     name = models.CharField(blank=True, max_length=255)
