@@ -1,6 +1,10 @@
-function post_locate_targets(geolocation_data) {
+var geo_location = new Object();
 
+function post_locate_targets(geolocation_data) {
+    
     if (geolocation_data.latitude != null && geolocation_data.longitude != null) {
+        geo_location = geolocation_data;
+        
         url = '/get_results/'+geolocation_data.latitude+'/'+geolocation_data.longitude;
         $('#results').load(url, function(){$('#loading').hide();});
         $('#results').show();      
@@ -54,8 +58,12 @@ function change_tab(tab_name){
 function setup_targets(){
 
     //setup geolocation callback
-    $.geolocator.geolocate({ callback: post_locate_targets});
-
+    if (geo_location.longitude == null) {
+        $.geolocator.geolocate({ callback: post_locate_targets});
+    } else {
+        post_locate_targets(geo_location)
+    }
+    
     $('#unsupported').hide();
     $('#loading').show();
     
@@ -72,6 +80,10 @@ function setup_targets(){
                     // $('<span class="error">'+data.error+'</span>').insertAfter('#postcode');
                     $('#error').html(data.error)
                 } else {
+                    
+                    geo_location.latitude = data.wgs84_lat
+                    geo_location.longitude = data.wgs84_lon
+                    
                     url = '/get_results/'+data.wgs84_lat+'/'+data.wgs84_lon;
 
                     $('#unsupported').hide();
@@ -88,7 +100,12 @@ function setup_targets(){
 
 function setup_events(){
     //setup geolocation callback
-    $.geolocator.geolocate({ callback: post_locate_events});
+    if (geo_location.latitude == null) {
+        $.geolocator.geolocate({ callback: post_locate_events});
+    } else {
+        post_locate_events(geo_location)
+    }
+
     $('#unsupported').hide();
     $('#loading').show();
 }
