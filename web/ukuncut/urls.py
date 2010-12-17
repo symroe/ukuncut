@@ -9,5 +9,4 @@ urlpatterns = patterns('',
    url(r'^get_events/(?P<lat>.*)/(?P<lng>.*)/$',views.get_events, name="get_events"),
    url(r'^$',views.index, name="index"),
    url(r'^dodgers\.kml/$',views.kml, name="kml"),
-   url(r'^what$',views.instructions, name="instructions"),
    )

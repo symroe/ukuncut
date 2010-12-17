@@ -27,13 +27,29 @@
     </div>
     <ul id="tabs">
         <li id="tab_one"{% ifequal menu_item 'index' %} class="selected"{% endifequal %}>
-            <a href="{% url index %}">Find A Target</a>
+            <a href="#">Find A Target</a>
         </li>
-        <li id="tab_two"{% ifequal menu_item 'instructions' %} class="selected"{% endifequal %}>
-            <a href="{% url instructions %}">When You Get There</a>
+        <li id="tab_two"{% ifequal menu_item 'events' %} class="selected"{% endifequal %}>
+            <a href="#">Actions</a>
+        </li>
+        <li id="tab_three"{% ifequal menu_item 'instructions' %} class="selected"{% endifequal %}>
+            <a href="#">About</a>
         </li>
     </ul>
     <div id="content">
+        <div id="unsupported">
+            <p>
+                Sorry, you phone or browser does not support geolocation, try entering your post code instead:
+                <form id="postcode_form"><input type="text" id="postcode"/><input type="submit" value="Search" id="postcode_search"><span id="error"></span></form>
+            </p>
+        </div>
+        <div id="results"></div>
+        <div id="loading">
+            <img src="{{MEDIA_URL}}/images/loading.gif" alt="loading"/>
+            <p>
+                Locating
+            </p>
+        </div>
         {% block content %}
             
         {% endblock %}

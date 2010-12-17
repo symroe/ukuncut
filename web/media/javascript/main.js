@@ -1,6 +1,7 @@
-function post_locate(geolocation_data) {
+function post_locate_targets(geolocation_data) {
+
     if (geolocation_data.latitude != null && geolocation_data.longitude != null) {
-        url = '/get_results/'+geolocation_data.latitude+'/'+geolocation_data.longitude
+        url = '/get_results/'+geolocation_data.latitude+'/'+geolocation_data.longitude;
         $('#results').load(url, function(){$('#loading').hide();});
         $('#results').show();      
     } else {
@@ -9,65 +10,55 @@ function post_locate(geolocation_data) {
     }
 }
 
-function change_tab(tab_name){
-    if (tab_name == 'results'){
-        $('#tab2').show();
-        $('#tab1').hide();        
-        $('#tab_two').addClass('selected');
-        $('#tab_one').removeClass('selected');        
-    }else{
-        $('#tab1').show();        
-        $('#tab2').hide();                
-        $('#tab_one').addClass('selected');
-        $('#tab_two').removeClass('selected');        
+function post_locate_events(geolocation_data) {
+    if (geolocation_data.latitude != null && geolocation_data.longitude != null) {
+        url = '/get_events/'+geolocation_data.latitude+'/'+geolocation_data.longitude;
+        $('#events').load(url, function(){$('#loading').hide();});
+        $('#events').show();      
+    } else {
+        $('#unsupported').show();
+        $('#loading').hide();        
     }
 }
 
-function setup_results(){
+function change_tab(tab_name){
+    $('#results').html('');
+    $('#events').html('');
+    if (tab_name == 'results'){
+        $('#tab1').show();
+        $('#tab2').hide();
+        $('#tab3').hide();                
+        $('#tab_one').addClass('selected');
+        $('#tab_two').removeClass('selected');        
+        $('#tab_three').removeClass('selected');    
+    }else if (tab_name == 'events'){
+        $('#tab1').hide();
+        $('#tab2').show();
+        $('#tab3').hide();
+        $('#tab_one').removeClass('selected');
+        $('#tab_two').addClass('selected');        
+        $('#tab_three').removeClass('selected');                            
+    }else{
+        $('#tab1').hide();
+        $('#tab2').hide();
+        $('#tab3').show();                
+        $('#tab_one').removeClass('selected');
+        $('#tab_two').removeClass('selected');        
+        $('#tab_three').addClass('selected');
+        
+        $('#unsupported').hide();
+        $('#loading').hide();
+    }
+}
+
+function setup_targets(){
+
     //setup geolocation callback
-    $.geolocator.geolocate({ callback: post_locate});
+    $.geolocator.geolocate({ callback: post_locate_targets});
+
+    $('#unsupported').hide();
+    $('#loading').show();
     
-    //setup iphone bookmark prompt
-    window.addEventListener('load', function() {
-      window.setTimeout(function() {
-        var bubble = new google.bookmarkbubble.Bubble();
-
-        var parameter = 'bmb=1';
-
-        bubble.hasHashParameter = function() {
-          return window.location.hash.indexOf(parameter) != -1;
-        };
-
-        bubble.setHashParameter = function() {
-          if (!this.hasHashParameter()) {
-            window.location.hash += parameter;
-          }
-        };
-
-        bubble.getViewportHeight = function() {
-          window.console.log('Example of how to override getViewportHeight.');
-          return window.innerHeight;
-        };
-
-        bubble.getViewportScrollY = function() {
-          window.console.log('Example of how to override getViewportScrollY.');
-          return window.pageYOffset;
-        };
-
-        bubble.registerScrollHandler = function(handler) {
-          window.console.log('Example of how to override registerScrollHandler.');
-          window.addEventListener('scroll', handler, false);
-        };
-
-        bubble.deregisterScrollHandler = function(handler) {
-          window.console.log('Example of how to override deregisterScrollHandler.');
-          window.removeEventListener('scroll', handler, false);
-        };
-
-        bubble.showIfAllowed();
-      }, 1000);
-    }, false);
-
     //Setup postcode fallback
     $('#postcode_search').bind('click', function() {
         postcode = $('#postcode').attr('value')
@@ -94,27 +85,87 @@ function setup_results(){
         return false;
     })   
 }
+
+function setup_events(){
+    //setup geolocation callback
+    $.geolocator.geolocate({ callback: post_locate_events});
+    $('#unsupported').hide();
+    $('#loading').show();
+}
+
 $(document).ready(function(){
     
         //buttons
+        $('#tab_one a').attr('href', '#');        
+        $('#tab_two a').attr('href', '#');        
+        $('#tab_three a').attr('href', '#');                
+                
         $('#tab_one a').click(
+            function(){
+                change_tab('results');
+                setup_targets();                
+                return false;
+            }
+        );
+        
+        $('#tab_two a').click(
+            function(){
+                change_tab('events');
+                setup_events();
+                return false;
+            }
+        );
+        
+        $('#tab_three a').click(
             function(){
                 change_tab('instructions');
                 return false;
             }
         );
-        $('#tab_one a').attr('href', '#');
         
-        $('#tab_two a').click(
-            function(){
-                change_tab('results');
-                return false;
-            }
-        );   
-        $('#tab_two a').attr('href', '#');        
+        //default tab
+        $('#tab_one a').click();
         
-        if ($('#tab1').is(":visible")){
-          setup_results();  
-        }     
+        //setup iphone bookmark prompt
+        window.addEventListener('load', function() {
+          window.setTimeout(function() {
+            var bubble = new google.bookmarkbubble.Bubble();
+
+            var parameter = 'bmb=1';
+
+            bubble.hasHashParameter = function() {
+              return window.location.hash.indexOf(parameter) != -1;
+            };
+
+            bubble.setHashParameter = function() {
+              if (!this.hasHashParameter()) {
+                window.location.hash += parameter;
+              }
+            };
+
+            bubble.getViewportHeight = function() {
+              window.console.log('Example of how to override getViewportHeight.');
+              return window.innerHeight;
+            };
+
+            bubble.getViewportScrollY = function() {
+              window.console.log('Example of how to override getViewportScrollY.');
+              return window.pageYOffset;
+            };
+
+            bubble.registerScrollHandler = function(handler) {
+              window.console.log('Example of how to override registerScrollHandler.');
+              window.addEventListener('scroll', handler, false);
+            };
+
+            bubble.deregisterScrollHandler = function(handler) {
+              window.console.log('Example of how to override deregisterScrollHandler.');
+              window.removeEventListener('scroll', handler, false);
+            };
+
+            bubble.showIfAllowed();
+          }, 1000);
+        }, false);
+    
 });
 

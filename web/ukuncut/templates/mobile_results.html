@@ -2,22 +2,12 @@
 
 {% block content %}
     <div id="tab1">
-        <div id="unsupported">
-            <p>
-                Sorry, you phone or browser does not support geolocation, try entering your post code instead:
-                <form id="postcode_form"><input type="text" id="postcode"/><input type="submit" value="Search" id="postcode_search"><span id="error"></span></form>
-            
-            </p>
-        </div>
         <div id="results"></div>
-        <div id="loading">
-            <img src="{{MEDIA_URL}}/images/loading.gif" alt="loading"/>
-            <p>
-                Locating Targets
-            </p>
-        </div>
     </div>
     <div id="tab2">
+        <div id="events"></div>
+    </div>    
+    <div id="tab3">
         <div class="instructions">
             <p>
                 The form the action takes is up to you.
@@ -28,6 +18,6 @@
                 We are targeting big corporations and the governments that support them, <strong>not staff or customers</strong> who are being screwed too. Civil disobedience is an important part of what we do, but whatever you decide to do <strong>keep it creative and constructive</strong>.
             </p>
         </div>
-    </div>    
+    </div>
     
 {% endblock %}
