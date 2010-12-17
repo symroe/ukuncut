@@ -13,7 +13,6 @@ function post_locate_targets(geolocation_data) {
 function post_locate_events(geolocation_data) {
     if (geolocation_data.latitude != null && geolocation_data.longitude != null) {
         url = '/get_events/'+geolocation_data.latitude+'/'+geolocation_data.longitude;
-        alert(url);
         $('#events').load(url, function(){$('#loading').hide();});
         $('#events').show();      
     } else {

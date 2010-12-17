@@ -14,17 +14,16 @@ a {padding:0.5em 0;color:#149997;}
 
 #start {padding:100px 0 0 0; text-align:center;}
 
-#results {display:none;}
-#results ul {list-style-type: none;padding:0; margin:16px 0 0 0;clear:both;}
-#results ul li {border-bottom:solid 1px #ccc;padding:10px;clear:left;}
-#results ul li:nth-child(odd) {
+#content ul {list-style-type: none;padding:0; margin:16px 0 0 0;clear:both;}
+#content ul li {border-bottom:solid 1px #ccc;padding:10px;clear:left;}
+#content ul li:nth-child(odd) {
   background-color: #f8f8f8;
 }
-#results ul li h3 {padding:5px 0 0 0; margin:0; font-weight:normal; font-size:14px;}
-#results ul li p {font-size:12px;padding:3px 0; margin:0;}
-#results ul li a.logo {float:left;margin:0 15px 5px 0; text-decoration:none;padding:0 0 5px 0;}
-#results ul li a.logo img {border:solid 1px #808080; padding:3px;}
-#results ul li a.logo span {display:block; width:65px;}
+#content ul li h3 {padding:5px 0 0 0; margin:0; font-weight:normal; font-size:14px;}
+#content ul li p {font-size:12px;padding:3px 0; margin:0;}
+#content ul li a.logo {float:left;margin:0 15px 5px 0; text-decoration:none;padding:0 0 5px 0;}
+#content ul li a.logo img {border:solid 1px #808080; padding:3px;}
+#content ul li a.logo span {display:block; width:65px;}
 
 .status {text-transform:uppercase; font-size:0.7em; color:#fff; padding:2px 0; text-align:center;position:relative;}
 .status.open {background:#4d863d;}
